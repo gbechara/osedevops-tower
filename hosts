@@ -1,2 +1,5 @@
 [master]
 10.100.192.200
+
+[master:vars]
+springbootdemo=mydemo2
