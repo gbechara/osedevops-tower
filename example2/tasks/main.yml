@@ -8,10 +8,6 @@
   action: command oc login -u system:admin -n openshift
   tags: example2
 
-- name: Create an PHP in development
-  action: command oc login -u dev1 -p dev1
-  tags: example2
-
 - name: Delete the development project if it exists
   shell: 'oc delete project development || echo "Project does not exist"'
   tags: example2
