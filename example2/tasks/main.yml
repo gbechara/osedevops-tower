@@ -1,0 +1,66 @@
+---
+
+##########################################################################
+# PHP DevOps Demo
+##########################################################################
+
+- name: Create an springbootdemo in development
+  action: command oc login -u dev1 -p dev1
+  tags: example1
+
+- name: Create a dev project
+  action: command oc new-project development
+  tags: examples
+
+- name: Grant edit access to developer
+  action: command oc policy add-role-to-user edit dev1
+  tags: examples
+
+- name: Grant edit access to tester
+  action: command oc policy add-role-to-user edit test1
+  tags: examples
+
+- name: Create a test project
+  action: command oc new-project testing
+  tags: examples
+
+- name: Grant edit access to tester
+  action: command oc policy add-role-to-user edit test1
+  tags: examples
+
+- name: Grant user dev1 admin role on project developement
+  action: command oc policy add-role-to-user admin dev1 -n development
+  tags: examples
+
+- name: Copy pipeline build
+  copy: src="pipeline.yaml" dest="."
+  tags: pipeline
+
+- name: Create pipeline build in developement
+  action: command oc create -f pipeline.yaml -n development
+  tags: pipeline
+
+- name: Enable the test project to pull development images
+  action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:testing -n development
+  tags: examples
+
+- name: Enable the production project to pull test images
+  action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n development
+  tags: examples
+
+- name: Enable the production project to pull development images
+  action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n testing
+  tags: examples
+
+- name: Create an application in development
+  action: command oc login -u dev1 -p dev1
+  tags: examples
+
+- name: Create an application in development
+  action: command oc project development
+  tags: examples
+
+- name: Create a PHP application in development
+  action: command oc new-app --template=1-cakephp-offline
+  tags: examples
+
