@@ -5,7 +5,7 @@ metadata:
   labels:
     name: devpipeline
   annotations:
-    pipeline.alpha.openshift.io/uses: '[{"name": "cakephp-offline", "namespace": "", "kind": "DeploymentConfig"}]'
+    pipeline.alpha.openshift.io/uses: '[{"name": "eap-app", "namespace": "", "kind": "DeploymentConfig"}]'
 spec:
   triggers:
     -
@@ -22,7 +22,7 @@ spec:
   strategy:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
-      jenkinsfile: "node('maven') {\nstage 'build'\nopenshiftBuild(buildConfig: 'cakephp-offline', showBuildLogs: 'true')\nstage 'deploy'\nopenshiftDeploy(deploymentConfig: 'cakephp-offline')\nopenshiftScale(deploymentConfig: 'cakephp-offline',replicaCount: '2')\n}"
+      jenkinsfile: "node('maven') {\nstage 'build'\nopenshiftBuild(buildConfig: 'eap-app', showBuildLogs: 'true')\nstage 'deploy'\nopenshiftDeploy(deploymentConfig: 'eap-app')\nopenshiftScale(deploymentConfig: 'eap-app',replicaCount: '2')\n}"
   output:
   resources:
   postCommit:
