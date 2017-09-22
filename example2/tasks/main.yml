@@ -18,7 +18,7 @@
 
 - name: Pause a 30 seconds for projet deletion
   pause:
-    sedonds: 30
+    seconds: 30
 
 - name: Create a dev project
   action: command oc new-project development
