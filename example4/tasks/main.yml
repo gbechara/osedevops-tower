@@ -1,24 +1,24 @@
 ---
 
 ##########################################################################
-# PHP DevOps Demo
+# EAP DevOps Demo
 ##########################################################################
 
 - name: Login as admin
   action: command oc login -u system:admin -n openshift
-  tags: example2
+  tags: example4
 
 - name: Delete the development project if it exists
   shell: 'oc delete project development || echo "Project does not exist"'
-  tags: example2
+  tags: example4
 
 - name: Delete the testing project if it exists
   shell: 'oc delete project testing || echo "Project does not exist"'
-  tags: example2
+  tags: example4
 
 - name: Delete the testing project if it exists
   shell: 'oc delete project production || echo "Project does not exist"'
-  tags: example2
+  tags: example4
 
 - name: Pause 30 seconds for projet deletion
   pause:
@@ -26,57 +26,57 @@
 
 - name: Create a dev project
   action: command oc new-project development
-  tags: example2
+  tags: example4
 
 - name: Grant edit access to developer
   action: command oc policy add-role-to-user edit dev1
-  tags: example2
+  tags: example4
 
 - name: Grant edit access to tester
   action: command oc policy add-role-to-user edit test1
-  tags: example2
+  tags: example4
 
 - name: Create a test project
   action: command oc new-project testing
-  tags: example2
+  tags: example4
 
 - name: Grant edit access to tester
   action: command oc policy add-role-to-user edit test1
-  tags: example2
+  tags: example4
 
 - name: Grant user dev1 admin role on project developement
   action: command oc policy add-role-to-user admin dev1 -n development
-  tags: example2
+  tags: example4
 
 - name: Copy pipeline build
   copy: src="pipeline.yaml" dest="."
-  tags: example2
+  tags: example4
 
 - name: Create pipeline build in developement
   action: command oc create -f pipeline.yaml -n development
-  tags: example2
+  tags: example4
 
 - name: Enable the test project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:testing -n development
-  tags: example2
+  tags: example4
 
 - name: Enable the production project to pull test images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n development
-  tags: example2
+  tags: example4
 
 - name: Enable the production project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n testing
-  tags: example2
+  tags: example4
 
 - name: Create an application in development
   action: command oc login -u dev1 -p dev1
-  tags: example2
+  tags: example4
 
 - name: Create an application in development
   action: command oc project development
-  tags: example2
+  tags: example4
 
-- name: Create a PHP application in development
-  action: command oc new-app --template=1-cakephp-offline
-  tags: example2
+- name: Create a EAP application in development
+  action: command oc new-app --template=1-eap64-ticket-monster-offline -l name=monapplicationjava
+  tags: example4
 
