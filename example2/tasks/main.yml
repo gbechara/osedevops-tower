@@ -17,7 +17,7 @@
   tags: example1
 
 - name: Delete the test project if it exists
-  action: command 'oc delete project test || echo 'Project does not exist'';
+  action: command 'oc delete project testing || echo 'Project does not exist'';
   tags: example1
 
 - name: Create a dev project
