@@ -77,6 +77,6 @@
   tags: example3
 
 - name: Create a NodeJS application in development
-  action: command oc new-app --template=nodejs-offline-example
+  action: command oc new-app --template=1-nodejs-offline-example
   tags: example3
 
