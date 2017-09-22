@@ -6,73 +6,73 @@
 
 - name: Login as admin
   action: command oc login -u system:admin -n openshift
-  tags: example1
+  tags: example2
 
-- name: Create an springbootdemo in development
+- name: Create an PHP in development
   action: command oc login -u dev1 -p dev1
-  tags: example1
+  tags: example2
 
 - name: Delete the dev project if it exists
   action: command 'oc delete project development || echo 'Project does not exist'';
-  tags: example1
+  tags: example2
 
 - name: Delete the test project if it exists
   action: command 'oc delete project testing || echo 'Project does not exist'';
-  tags: example1
+  tags: example2
 
 - name: Create a dev project
   action: command oc new-project development
-  tags: example1
+  tags: example2
 
 - name: Grant edit access to developer
   action: command oc policy add-role-to-user edit dev1
-  tags: example1
+  tags: example2
 
 - name: Grant edit access to tester
   action: command oc policy add-role-to-user edit test1
-  tags: example1
+  tags: example2
 
 - name: Create a test project
   action: command oc new-project testing
-  tags: example1
+  tags: example2
 
 - name: Grant edit access to tester
   action: command oc policy add-role-to-user edit test1
-  tags: example1
+  tags: example2
 
 - name: Grant user dev1 admin role on project developement
   action: command oc policy add-role-to-user admin dev1 -n development
-  tags: example1
+  tags: example2
 
 - name: Copy pipeline build
   copy: src="pipeline.yaml" dest="."
-  tags: example1
+  tags: example2
 
 - name: Create pipeline build in developement
   action: command oc create -f pipeline.yaml -n development
-  tags: example1
+  tags: example2
 
 - name: Enable the test project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:testing -n development
-  tags: example1
+  tags: example2
 
 - name: Enable the production project to pull test images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n development
-  tags: example1
+  tags: example2
 
 - name: Enable the production project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n testing
-  tags: example1
+  tags: example2
 
 - name: Create an application in development
   action: command oc login -u dev1 -p dev1
-  tags: example1
+  tags: example2
 
 - name: Create an application in development
   action: command oc project development
-  tags: example1
+  tags: example2
 
 - name: Create a PHP application in development
   action: command oc new-app --template=1-cakephp-offline
-  tags: example1
+  tags: example2
 
