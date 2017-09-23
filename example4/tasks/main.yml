@@ -20,9 +20,9 @@
   shell: 'oc delete project production || echo "Project does not exist"'
   tags: example4
 
-- name: Pause 30 seconds for projet deletion
+- name: Pause 3 seconds for projet deletion
   pause:
-    seconds: 30
+    seconds: 3
 
 - name: Create a dev project
   action: command oc new-project development

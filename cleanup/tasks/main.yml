@@ -1,0 +1,22 @@
+---
+
+##########################################################################
+# PHP DevOps Demo
+##########################################################################
+
+- name: Login as admin
+  action: command oc login -u system:admin -n openshift
+  tags: cleanup
+
+- name: Delete the development project if it exists
+  shell: 'oc delete project development || echo "Project does not exist"'
+  tags: cleanup
+
+- name: Delete the testing project if it exists
+  shell: 'oc delete project testing || echo "Project does not exist"'
+  tags: cleanup
+
+- name: Delete the testing project if it exists
+  shell: 'oc delete project production || echo "Project does not exist"'
+  tags: cleanup
+
