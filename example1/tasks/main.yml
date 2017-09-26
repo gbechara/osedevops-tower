@@ -16,6 +16,13 @@
   action: command oc new-app --template=1-springboot-mongo-gluster
   tags: example1
 
+- name: Copy Config Map File
+  copy: src="application.yaml" dest="."
+  tags: example1
+
+- name: Create turbine server config map
+  action: oc create configmap turbine-server --from-file=application.yml -n {{springbootdemo}}
+
 - name: Create a hystrix-dashboard
   action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/hystrix-dashboard/1.0.28/hystrix-dashboard-1.0.28-openshift.yml
   tags: example1
