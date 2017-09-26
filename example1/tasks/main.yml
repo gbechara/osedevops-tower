@@ -28,6 +28,10 @@
   action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/turbine-server/1.0.28/turbine-server-1.0.28-openshift.yml
   tags: example1
 
+- name: Add admin role to turbine-server sa
+  action: command oc policy add-role-to-user admin system:serviceaccount:{{springbootdemo}}:turbine
+  tags: example1
+
 
 - name: Create a hystrix-dashboard
   action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/hystrix-dashboard/1.0.28/hystrix-dashboard-1.0.28-openshift.yml
