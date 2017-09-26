@@ -17,7 +17,7 @@
   tags: example1
 
 - name: Copy Config Map File
-  copy: src="application.yaml" dest="."
+  copy: src="application.yml" dest="."
   tags: example1
 
 - name: Create turbine server config map
