@@ -16,8 +16,12 @@
   action: command oc new-app --template=1-springboot-mongo-gluster
   tags: example1
 
+#- name: Copy Config Map File
+#  copy: src="application.yml" dest="."
+#  tags: example1
+
 - name: Copy Config Map File
-  copy: src="application.yml" dest="."
+  action: template src=application.yml dest=.
   tags: example1
 
 - name: Create turbine server config map
