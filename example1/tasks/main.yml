@@ -24,6 +24,11 @@
   action: command oc create configmap turbine-server --from-file=application.yml -n {{springbootdemo}}
   tags: example1
 
+- name: Create a turbine-server
+  action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/turbine-server/1.0.28/turbine-server-1.0.28-openshift.yml
+  tags: example1
+
+
 - name: Create a hystrix-dashboard
   action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/hystrix-dashboard/1.0.28/hystrix-dashboard-1.0.28-openshift.yml
   tags: example1
